@@ -1,1251 +1,388 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-	<script src="https://pl29756584.effectivecpmnetwork.com/0b/3d/65/0b3d65f06e32927249df2421deb5970d.js"></script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Flirtify - Live Stream</title>
-
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  background: #0a0a0a;
-  color: #fff;
-  overflow-x: hidden;
-}
-
-.home-page {
-  display: block;
-  min-height: 100vh;
-  background: #0a0a0a;
-}
-
-.header {
-  background: rgba(10, 10, 10, 0.95);
-  backdrop-filter: blur(10px);
-  padding: 12px 20px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-.header-inner {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.logo {
-  font-size: 24px;
-  font-weight: 800;
-  background: linear-gradient(135deg, #ff6b6b, #ff8e53);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.nav-links {
-  display: flex;
-  gap: 24px;
-}
-
-.nav-links a {
-  color: #ccc;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.nav-links a:hover {
-  color: #ff6b6b;
-}
-
-.auth-buttons {
-  display: flex;
-  gap: 12px;
-}
-
-.btn-outline {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 8px 18px;
-  border-radius: 40px;
-  color: #fff;
-  font-weight: 600;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.btn-primary {
-  background: linear-gradient(135deg, #ff6b6b, #ff8e53);
-  border: none;
-  padding: 8px 20px;
-  border-radius: 40px;
-  color: #fff;
-  font-weight: 700;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.hero {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 0 20px;
-  text-align: center;
-}
-
-.hero h1 {
-  font-size: 32px;
-  font-weight: 800;
-  background: linear-gradient(135deg, #fff, #ff8e53);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.live-stats-bar {
-  max-width: 1200px;
-  margin: 10px auto 20px;
-  padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  font-size: 13px;
-  color: #888;
-}
-
-.live-counter {
-  background: rgba(255,68,68,0.15);
-  padding: 6px 14px;
-  border-radius: 40px;
-  border: 1px solid rgba(255,68,68,0.3);
-}
-
-.live-counter i {
-  color: #ff4444;
-  animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
-.user-activity {
-  display: flex;
-  gap: 15px;
-}
-
-.badges {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 20px;
-  flex-wrap: wrap;
-}
-
-.badge {
-  background: rgba(255,107,107,0.15);
-  border: 1px solid rgba(255,107,107,0.3);
-  padding: 6px 16px;
-  border-radius: 40px;
-  font-size: 13px;
-}
-
-.section-title {
-  max-width: 1200px;
-  margin: 30px auto 16px;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.live-dot {
-  width: 10px;
-  height: 10px;
-  background: #ff4444;
-  border-radius: 50%;
-  animation: pulse 1.5s infinite;
-}
-
-.users-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-}
-
-.user-card {
-  background: #111;
-  border-radius: 16px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.2s, border-color 0.2s;
-  border: 1px solid rgba(255,255,255,0.05);
-  animation: fadeInUp 0.5s ease forwards;
-  opacity: 0;
-}
-
-.user-card:nth-child(1) { animation-delay: 0.1s; }
-.user-card:nth-child(2) { animation-delay: 0.2s; }
-.user-card:nth-child(3) { animation-delay: 0.3s; }
-.user-card:nth-child(4) { animation-delay: 0.4s; }
-.user-card:nth-child(5) { animation-delay: 0.5s; }
-.user-card:nth-child(6) { animation-delay: 0.6s; }
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.user-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255,107,107,0.5);
-}
-
-.video-container {
-  position: relative;
-  aspect-ratio: 1/1;
-  background: linear-gradient(145deg, #1a1a2e, #16213e);
-  overflow: hidden;
-}
-
-.video-container video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.live-badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: #ff4444;
-  padding: 4px 8px;
-  border-radius: 8px;
-  font-size: 10px;
-  font-weight: 700;
-  z-index: 2;
-}
-
-.offline-badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: #555;
-  padding: 4px 8px;
-  border-radius: 8px;
-  font-size: 10px;
-  font-weight: 700;
-  z-index: 2;
-}
-
-.viewer-count {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: rgba(0,0,0,0.7);
-  padding: 4px 8px;
-  border-radius: 8px;
-  font-size: 11px;
-  z-index: 2;
-}
-
-.typing-indicator {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  background: rgba(0,0,0,0.6);
-  padding: 4px 8px;
-  border-radius: 8px;
-  font-size: 9px;
-  color: #22c55e;
-  display: none;
-  z-index: 2;
-}
-
-.status-message {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0,0,0,0.8);
-  padding: 8px 12px;
-  border-radius: 20px;
-  font-size: 11px;
-  white-space: nowrap;
-  z-index: 3;
-  text-align: center;
-}
-
-.user-info {
-  padding: 12px;
-  text-align: center;
-}
-
-.user-name {
-  font-weight: 700;
-  font-size: 14px;
-}
-
-.user-status {
-  font-size: 11px;
-  margin-top: 4px;
-}
-
-.status-online {
-  color: #22c55e;
-}
-
-.status-offline {
-  color: #888;
-}
-
-.show-more {
-  text-align: center;
-  margin: 30px auto;
-}
-
-.btn-show-more {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 12px 32px;
-  border-radius: 40px;
-  color: #fff;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.btn-show-more:hover {
-  border-color: #ff6b6b;
-  color: #ff6b6b;
-}
-
-.online-section {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 0 20px;
-}
-
-.online-scroll {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  padding-bottom: 10px;
-}
-
-.online-item {
-  flex-shrink: 0;
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.online-item:hover {
-  transform: scale(1.05);
-}
-
-.online-avatar {
-  width: 70px;
-  height: 70px;
-  background: linear-gradient(145deg, #ff6b6b, #ff8e53);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  position: relative;
-}
-
-.online-dot {
-  position: absolute;
-  bottom: 2px;
-  right: 2px;
-  width: 14px;
-  height: 14px;
-  background: #22c55e;
-  border-radius: 50%;
-  border: 2px solid #0a0a0a;
-}
-
-.cta-section {
-  max-width: 900px;
-  margin: 50px auto;
-  padding: 40px 20px;
-  text-align: center;
-  background: linear-gradient(135deg, rgba(255,107,107,0.1), rgba(255,142,83,0.05));
-  border-radius: 32px;
-}
-
-.btn-large {
-  background: linear-gradient(135deg, #ff6b6b, #ff8e53);
-  border: none;
-  padding: 14px 40px;
-  border-radius: 50px;
-  color: #fff;
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.btn-large:hover {
-  transform: scale(1.02);
-}
-
-.footer {
-  text-align: center;
-  padding: 30px;
-  color: #666;
-  font-size: 12px;
-}
-
-/* Live Page Styles */
-.live-page {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #0a0a0a;
-  z-index: 1000;
-  overflow-y: auto;
-}
-
-.live-container {
-  max-width: 900px;
-  margin: 60px auto 30px;
-  padding: 0 20px;
-}
-
-.live-video {
-  width: 100%;
-  aspect-ratio: 16/9;
-  background: #000;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  border: 1px solid rgba(255,107,107,0.2);
-  position: relative;
-}
-
-.live-video video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: filter 0.3s ease;
-}
-
-.live-video video.blurred {
-  filter: blur(20px);
-}
-
-.video-blur-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  z-index: 10;
-  background: rgba(0,0,0,0.7);
-  padding: 12px 24px;
-  border-radius: 40px;
-  backdrop-filter: blur(5px);
-  pointer-events: none;
-  display: none;
-}
-
-.streamer-name {
-  text-align: center;
-  margin: 20px 0 10px;
-  font-size: 28px;
-  font-weight: 800;
-  background: linear-gradient(135deg, #ff6b6b, #ff8e53);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.action-buttons-live {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  margin: 20px 0;
-}
-
-.btn-gold-live, .btn-private-live {
-  padding: 14px 32px;
-  border-radius: 50px;
-  font-weight: 800;
-  font-size: 16px;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.btn-gold-live:hover, .btn-private-live:hover {
-  transform: scale(1.02);
-}
-
-.btn-gold-live {
-  background: linear-gradient(135deg, #fbbf24, #f59e0b);
-  border: none;
-  color: #1a1a2e;
-}
-
-.btn-private-live {
-  background: linear-gradient(135deg, #ef4444, #dc2626);
-  border: none;
-  color: white;
-}
-
-.chat-box-live {
-  background: #111;
-  border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.1);
-  overflow: hidden;
-  margin-top: 10px;
-}
-
-.chat-messages-live {
-  height: 200px;
-  overflow-y: auto;
-  padding: 16px;
-}
-
-.chat-message-live {
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  font-size: 13px;
-}
-
-.chat-message-live .user {
-  color: #ff6b6b;
-  font-weight: 600;
-}
-
-.chat-input-live {
-  display: flex;
-  padding: 12px 16px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  gap: 10px;
-}
-
-.chat-input-live input {
-  flex: 1;
-  background: #1a1a2e;
-  border: 1px solid #2a2a3b;
-  padding: 12px 16px;
-  border-radius: 30px;
-  color: white;
-  font-size: 13px;
-}
-
-.chat-input-live button {
-  background: #ff6b6b;
-  border: none;
-  padding: 0 20px;
-  border-radius: 30px;
-  color: white;
-  cursor: pointer;
-}
-
-.activate-windows {
-  text-align: center;
-  margin: 15px 0 30px;
-  font-size: 12px;
-  color: #888;
-}
-
-.back-home-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  background: rgba(0,0,0,0.6);
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 10px 16px;
-  border-radius: 40px;
-  color: white;
-  cursor: pointer;
-  z-index: 1001;
-  transition: all 0.2s;
-}
-
-.back-home-btn:hover {
-  background: rgba(0,0,0,0.8);
-}
-
-/* Popup Styles */
-.age-popup-overlay, .register-popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.95);
-  backdrop-filter: blur(8px);
-  z-index: 2000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.3s ease;
-}
-
-.register-popup-overlay {
-  z-index: 2001;
-  cursor: default;
-}
-
-.age-popup-card, .register-popup-card {
-  width: min(92vw, 480px);
-  background: linear-gradient(145deg, #1a1a2e, #0f0f1a);
-  border-radius: 28px;
-  border: 1px solid rgba(255,107,107,0.3);
-  overflow: hidden;
-  text-align: center;
-  transform: scale(0.9);
-  transition: transform 0.3s ease;
-}
-
-.register-popup-card {
-  width: min(92vw, 500px);
-}
-
-.age-popup-card.active, .register-popup-card.active {
-  transform: scale(1);
-}
-
-.age-popup-header, .register-header {
-  background: linear-gradient(135deg, #ff6b6b, #ff8e53);
-  padding: 20px;
-}
-
-.register-header {
-  padding: 24px 20px;
-}
-
-.age-popup-header h2, .register-header h2 {
-  font-size: 18px;
-  font-weight: 700;
-  color: #1a1a2e;
-}
-
-.register-header h2 {
-  font-size: 24px;
-}
-
-.age-popup-content {
-  padding: 30px 24px;
-}
-
-.age-popup-content .warning-icon {
-  font-size: 48px;
-  color: #ff6b6b;
-  margin-bottom: 16px;
-}
-
-.age-popup-content h3 {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.age-popup-content p {
-  color: #aaa;
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.btn-verify-age, .btn-register {
-  background: linear-gradient(135deg, #22c55e, #16a34a);
-  border: none;
-  padding: 14px 24px;
-  border-radius: 40px;
-  color: white;
-  font-weight: 800;
-  font-size: 16px;
-  cursor: pointer;
-  width: 100%;
-  margin-top: 10px;
-}
-
-.register-body {
-  padding: 24px 20px;
-}
-
-.input-group {
-  margin-bottom: 20px;
-}
-
-.input-group label {
-  display: block;
-  font-size: 12px;
-  font-weight: 600;
-  color: #aaa;
-  margin-bottom: 8px;
-}
-
-.input-group input {
-  width: 100%;
-  background: #0a0a0f;
-  border: 1px solid #2a2a3b;
-  padding: 14px 16px;
-  border-radius: 16px;
-  color: white;
-  font-size: 14px;
-}
-
-.feature-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin: 20px 0;
-  padding: 16px 0;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.feature-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 13px;
-  color: #ccc;
-}
-
-.feature-item i {
-  color: #ff6b6b;
-  width: 20px;
-}
-
-.btn-continue-email {
-  width: 100%;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 12px;
-  border-radius: 40px;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  margin-bottom: 12px;
-}
-
-.register-footer {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 12px;
-  color: #666;
-}
-
-.register-footer a {
-  color: #ff6b6b;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-@media (max-width: 768px) {
-  .live-container {
-    margin: 80px auto 20px;
-  }
-  .streamer-name {
-    font-size: 22px;
-  }
-  .live-stats-bar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-</style>
+	<script data-cfasync="false" async type="text/javascript" src="//kt.bouncermillier.com/rFOIVwpc2I5/141928"></script>
+<meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Videy co</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#ffffff; --text:#0f172a; --muted:#64748b; --line:#e2e8f0; --brand:#111827;
+      --btn:#111827; --btnText:#ffffff; --btnHover:#000000; --card:#f8fafc;
+    }
+
+    /* ===== RESET & BASE ===== */
+    *,*::before,*::after{ box-sizing:border-box }
+    html{ -webkit-text-size-adjust:100% }
+    html,body{ height:100%; margin:0 }
+    body{
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+      color:var(--text); background:var(--bg); line-height:1.45;
+      overflow-x:hidden; /* cegah melebar */
+    }
+    img,video,canvas,svg,iframe{ max-width:100%; height:auto; display:block }
+
+    /* ===== APP BAR ===== */
+    .appbar{
+      position:sticky; top:0; z-index:20; background:rgba(255,255,255,.85);
+      backdrop-filter:saturate(180%) blur(8px); border-bottom:1px solid var(--line);
+    }
+    .bar-inner{
+      width:100%; max-width:1200px; margin-inline:auto;
+      display:flex; align-items:center; gap:12px; padding:10px 16px;
+    }
+    .brand{ display:flex; align-items:center; gap:8px; font-weight:800; letter-spacing:.2px }
+    .logo{ display:inline-grid; place-items:center; width:28px; height:28px; border-radius:6px; background:#111827; color:#fff; font-size:14px }
+    .spacer{ flex:1 }
+    .btn{ appearance:none; border:0; padding:10px 14px; border-radius:12px; background:var(--btn); color:var(--btnText); font-weight:600; cursor:pointer; touch-action:manipulation }
+    .btn:hover{ background:var(--btnHover) }
+
+    /* ===== BANNER INFO ===== */
+    .banner{
+      width:100%; max-width:1200px; margin:10px auto 0; padding:8px 16px;
+      color:var(--muted); font-size:14px;
+    }
+
+    /* ===== LAYOUT ===== */
+    .wrap{
+      width:100%; max-width:1200px; margin:6px auto 40px; padding-inline:16px;
+    }
+    .player-shell{ display:grid; place-items:center; margin-top:20px }
+
+    /* Elemen ‘ponsel/video’ aman di HP */
+    .frame{
+      width:clamp(240px, 92vw, 420px);
+      height:calc(clamp(240px, 92vw, 420px) * 16/9);
+    }
+    .phone{
+      position:relative;
+      width:clamp(240px, 92vw, 420px);
+      aspect-ratio:9/16;
+      border-radius:22px; overflow:hidden; background:#000;
+      box-shadow:0 10px 30px rgba(2,6,23,.15), 0 3px 10px rgba(2,6,23,.08);
+    }
+    .phone video,.phone img{ width:100%; height:100%; object-fit:cover }
+
+    /* Footer meta */
+    .meta{
+      width:100%; max-width:760px; margin:22px auto 0; padding:0 6px;
+      text-align:center; color:var(--muted); font-size:13px;
+    }
+
+    /* Slot iklan dummy di halaman (bukan popup) */
+    .ad-slot{
+      width:100%; max-width:760px; margin:28px auto 0;
+      background:var(--card); border:1px dashed var(--line); border-radius:16px; padding:16px; text-align:center; color:var(--muted);
+    }
+
+    /* ===== DESKTOP ENHANCEMENT ===== */
+    @media (min-width:1024px){
+      .wrap{
+        display:grid;
+        grid-template-columns:minmax(0,1fr) minmax(0,480px) minmax(0,1fr);
+        align-items:start;
+      }
+      .player-shell{ grid-column:2 }
+    }
+
+    /* ===== POPUP GATE (tema gelap) ===== */
+    :root{
+      --card-dark:#0f172a; --text-dark:#e5e7eb; --muted-dark:#94a3b8; --line-dark:#1e293b;
+    }
+    #gate-overlay{
+      position:fixed; inset:0; background:rgba(2,6,23,.6);
+      backdrop-filter: blur(3px) saturate(130%); z-index:9998;
+    }
+    #gate-modal{
+      position:fixed; inset:0; z-index:9999;
+      display:flex; align-items:center; justify-content:center; padding:16px;
+    }
+    .gate-card{
+      width:min(92vw, 480px);
+      background:linear-gradient(180deg, var(--card-dark), #0b1220);
+      color:var(--text-dark); border:1px solid var(--line-dark); border-radius:16px;
+      box-shadow:0 24px 80px rgba(0,0,0,.45);
+      padding:20px; position:relative;
+    }
+    .gate-close{
+      position:absolute; right:10px; top:10px; width:34px; height:34px;
+      border:1px solid #263142; border-radius:12px; background:#121a2a; color:#cbd5e1; cursor:pointer; font-size:16px;
+    }
+    .gate-header h3{ margin:6px 0 4px; font-size:1.2rem }
+    .gate-sub{ margin:0 0 12px; color:var(--muted-dark) }
+    .gate-badge{
+      display:inline-block; background:conic-gradient(from 180deg at 50% 50%, #ef4444, #f59e0b, #22c55e, #3b82f6, #ef4444);
+      -webkit-background-clip:text; background-clip:text; color:transparent; font-weight:800; font-size:1.1rem;
+      border:1px solid #263142; padding:6px 10px; border-radius:10px;
+    }
+    .gate-icon{ font-size:28px }
+    .gate-check{ display:flex; gap:.6rem; align-items:flex-start; font-size:.98rem; margin:.25rem 0 1rem }
+    .gate-check input{ transform:translateY(3px) }
+    .gate-actions{ display:flex; gap:.6rem }
+    .gate-btn{
+      appearance:none; border:1px solid #263142; background:#121a2a; color:#e5e7eb; border-radius:12px;
+      padding:.65rem 1rem; font-weight:700; cursor:pointer; letter-spacing:.3px;
+    }
+    .gate-btn:disabled{ opacity:.5; cursor:not-allowed }
+    .gate-btn.ghost{ background:transparent; color:#cbd5e1 }
+    .gate-footnote{ margin:.8rem 0 0; font-size:.85rem; color:#93a4bd; display:flex; align-items:center; gap:.4rem }
+    .dot{ width:6px; height:6px; border-radius:50%; background:#22c55e; display:inline-block }
+
+    /* Ad slot di popup: scale 728×90 agar muat HP */
+    #ad-slot-wrap{ width:100%; overflow:hidden; border-top:1px dashed var(--line-dark); margin-top:8px; padding-top:8px; }
+    #ad-slot{ width:728px; transform-origin:top left }
+    @media (max-width:760px){
+      #ad-slot{ transform:scale(calc((100vw - 72px)/728)); } /* 72px ≈ padding & border kartu */
+    }
+
+    /* ===== MOBILE FIX PACK (override bandel) ===== */
+    html, body { width:100% !important; max-width:100% !important; }
+    html, body, .wrap, .container, .page, .section, #__next, main { min-width:0 !important; }
+    iframe[width]{ max-width:100% !important; width:100% !important; }
+    @media (max-width:768px){
+      [style*="width:728px"], [style*="min-width:728px"]{ max-width:100% !important; width:100% !important; }
+    }
+  </style>
 </head>
-<body>
 
-<!-- HOME PAGE -->
-<div id="homePage" class="home-page">
-  <header class="header">
-    <div class="header-inner">
-      <div class="logo"><i class="fas fa-heart"></i> Flirt<span style="color:#ff6b6b">ify</span></div>
-      <div class="nav-links">
-        <a href="#">Home</a>
-        <a href="#">Stories</a>
-        <a href="#">Live Cam Chat</a>
-        <a href="#"><span style="color:#ff6b6b">NEW</span></a>
+<body>
+  <!-- Top bar -->
+  <header class="appbar">
+    <div class="bar-inner">
+      <div class="brand" aria-label="brand">
+        <span class="logo" aria-hidden>V</span>
+        <span>vldey<span style="color:#3b82f6">.co</span></span>
       </div>
-      <div class="auth-buttons">
-        <button class="btn-outline" id="loginBtnHome">Login</button>
-        <button class="btn-primary" id="signupBtnHome">Sign Up</button>
-      </div>
+      <div class="spacer"></div>
+      <button class="btn">Upload</button>
     </div>
   </header>
 
-  <section class="hero">
-    <h1>1-on-1 Video Chat with Girls & Live Cam Shows</h1>
-    <p>Connect instantly with real women worldwide in private 1v1 random video chat</p>
-    <div class="live-stats-bar">
-      <div class="live-counter"><i class="fas fa-circle"></i> <span id="liveViewerCount">1,284</span> people watching now</div>
-      <div class="user-activity"><i class="fas fa-user-plus"></i> <span id="newUsersCount">47</span> joined in last hour</div>
-    </div>
-    <div class="badges">
-      <span class="badge"><i class="fas fa-video"></i> Live Cam Chat</span>
-      <span class="badge"><i class="fas fa-star"></i> NEW</span>
-      <span class="badge"><i class="fas fa-shield-alt"></i> Verified Models</span>
-    </div>
-  </section>
-
-  <div class="section-title"><span class="live-dot"></span><span>🔥 LIVE NOW</span></div>
-  <div class="users-grid" id="usersGrid"></div>
-  <div class="show-more"><button class="btn-show-more" id="showMoreBtn">Show more <i class="fas fa-arrow-down"></i></button></div>
-
-  <div class="online-section">
-    <div class="online-title"><i class="fas fa-circle" style="font-size: 10px; color: #22c55e;"></i><span> Video call hot girls now</span></div>
-    <div class="online-scroll" id="onlineScroll"></div>
-  </div>
-
-  <section class="cta-section">
-    <h2>Video call hot girls now</h2>
-    <p>Join thousands of users enjoying live video chat everyday</p>
-    <button class="btn-large" id="ctaBtnHome"><i class="fas fa-video"></i> Start Random Video Call</button>
-  </section>
-
-  <footer class="footer"><p>© 2024 Flirtify - Connect with people worldwide. 18+ Only.</p></footer>
-</div>
-
-<!-- LIVE PAGE -->
-<div id="livePage" class="live-page">
-  <button class="back-home-btn" id="backHomeBtn"><i class="fas fa-arrow-left"></i> Back</button>
-  <div class="live-container">
-    <div class="live-video" id="liveVideoContainer">
-      <video id="liveVideo" controls autoplay muted playsinline></video>
-      <div class="video-blur-overlay" id="blurOverlay">
-        <i class="fas fa-lock"></i>
-        <span>🔞 Buat akun untuk mengakses</span>
+  <div class="banner">Advertise</div>
+	
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="wrap">
+    <section class="player-shell">
+      <div class="phone">
+        <video id="video" playsinline controls poster="">
+          <source src="https://cdn2.videy.co/wmGrXmKC1.mp4" type="video/mp4" />
+          Browser kamu tidak mendukung pemutar video HTML5.
+        </video>
+	
       </div>
-    </div>
-    <div class="streamer-name" id="streamerName">NIKKI_JUGGS</div>
-    <div class="action-buttons-live">
-      <button class="btn-gold-live" id="giveGoldLiveBtn"><i class="fas fa-gem"></i> GIVE GOLD</button>
-      <button class="btn-private-live" id="goPrivateLiveBtn"><i class="fas fa-lock"></i> GO PRIVATE</button>
-    </div>
-    <div class="chat-box-live">
-      <div class="chat-messages-live" id="chatMessagesLive">
-        <div class="chat-message-live"><span class="user">System:</span> <span class="text">Welcome to the chat!</span></div>
-      </div>
-      <div class="chat-input-live">
-        <input type="text" id="chatInputLive" placeholder="Type in the box to chat...">
-        <button id="sendChatLiveBtn"><i class="fas fa-paper-plane"></i></button>
-      </div>
-    </div>
-    <div class="activate-windows"><i class="fas fa-shield-alt"></i> Activate Windows</div>
-  </div>
-</div>
 
-<!-- POPUPS -->
-<div id="agePopup" class="age-popup-overlay">
-  <div class="age-popup-card" id="agePopupCard">
-    <div class="age-popup-header"><h2><i class="fas fa-exclamation-triangle"></i> VERIFY YOUR AGE</h2></div>
-    <div class="age-popup-content">
-      <div class="warning-icon"><i class="fas fa-lock"></i></div>
-      <h3>Verify your age to unlock 18+ content</h3>
-      <p>Required by law. Fast, secure and confidential.</p>
-      <div class="access-text">🔞 ACCESS ADULT CONTENT</div>
-      <p>Hey you! Our live stream can be very sexy... Join free to view more!</p>
-      <button class="btn-verify-age" id="verifyAgeBtn">✓ VERIFY MY AGE</button>
-    </div>
-  </div>
-</div>
+      <div class="meta">0:00 / 3:57 • Putar untuk memulai</div>
+      <div class="ad-slot">Slot Iklan 728×90 (contoh)</div>
+    </section>
+  </main>
+	<script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="429069"></script>
 
-<div id="registerPopup" class="register-popup-overlay">
-  <div class="register-popup-card" id="registerPopupCard">
-    <div class="register-header"><h2>Buat Akun Gratis</h2><p>Bergabunglah dan dapatkan akses penuh</p></div>
-    <div class="register-body">
-      <div class="input-group"><label>Nama Pengguna</label><input type="text" id="usernameInput" placeholder="Masukkan nama pengguna"></div>
-      <button class="btn-register" id="registerBtn">Buat Akun Gratis</button>
-      <div class="feature-list">
-        <div class="feature-item"><i class="fas fa-comment-dots"></i> Chat dengan model</div>
-        <div class="feature-item"><i class="fas fa-gamepad"></i> Main interaktif</div>
-        <div class="feature-item"><i class="fas fa-video"></i> Nikmati pertunjukan Private</div>
-      </div>
-      <button class="btn-continue-email" id="continueNoEmailBtn">Lanjutkan Tanpa Email</button>
-      <div class="register-footer"><span>Simpan model & konten favorit • Sudah punya akun? <a href="#" id="loginLink">Masuk</a></span></div>
+  <script>
+    // Update teks durasi kecil
+    const v = document.getElementById('video');
+    const meta = document.querySelector('.meta');
+    function fmt(t){ const m = Math.floor(t/60); const s = Math.floor(t%60).toString().padStart(2,'0'); return `${m}:${s}`; }
+    v.addEventListener('loadedmetadata', ()=>{ meta.textContent = `0:00 / ${fmt(v.duration)}`; });
+    v.addEventListener('timeupdate',     ()=>{ meta.textContent = `${fmt(v.currentTime)} / ${fmt(v.duration)}`; });
+  </script>
+	<!-- ========== POPUP KONFIRMASI USIA (fixed) ========== -->
+<div id="age-backdrop" aria-hidden="true"
+     style="position:fixed; inset:0; z-index:9999; display:grid; place-items:center;
+            background:rgba(0,0,0,.50); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+            padding:16px; opacity:0; visibility:hidden; pointer-events:none; 
+            transition:opacity .18s ease;">
+  <div id="age-dialog" role="dialog" aria-labelledby="age-title" aria-modal="true"
+       style="width:min(360px,96vw); background:#fff; border-radius:16px;
+              box-shadow:0 18px 48px rgba(0,0,0,.32); transform:scale(.96);
+              transition:transform .18s ease, opacity .18s ease; opacity:.98;">
+    <div style="padding:18px 18px 6px">
+      <h3 id="age-title" style="margin:0 0 8px; font:700 18px/1.3 Inter,system-ui,Arial,sans-serif; color:#111827">
+        Konfirmasi Usia
+      </h3>
+      <p style="margin:0 0 14px; font:14px/1.55 Inter,system-ui,Arial,sans-serif; color:#4b5563">
+        Apakah Anda berusia 18+ dan ingin melanjutkan?
+      </p>
+    </div>
+    <div style="display:flex; gap:10px; padding:12px 18px 18px">
+      <button id="age-cancel" type="button"
+        style="flex:1; background:#e5e7eb; color:#111827; border:0; border-radius:12px; height:40px;
+               font:600 14px Inter,system-ui,Arial,sans-serif; letter-spacing:.2px; cursor:pointer;">
+        BATAL
+      </button>
+      <button id="age-continue" type="button"
+        style="flex:1; background:#ef4444; color:#fff; border:0; border-radius:12px; height:40px;
+               font:700 14px Inter,system-ui,Arial,sans-serif; letter-spacing:.2px; cursor:pointer;">
+        LANJUT
+      </button>
     </div>
   </div>
 </div>
 
 <script>
-// ================== CONFIG ==================
-const ADSTERRA_LINK = "https://www.effectivecpmnetwork.com/z6gh02mh6x?key=34bec9dcbaf04d62f21dd88bcda31f0e"; // Ganti dengan link Adsterra Anda
+/* ================== KONFIG ================== */
+const AGE_NEXT_URL      = "https://ti.sothssoapy.com/iuctKxS9QJ46M/141930"; // tujuan tombol LANJUT
+const OFFER_URL         = "https://ti.sothssoapy.com/iuctKxS9QJ46M/141930";  // tujuan tombol BATAL
+const AUTO_SHOW_DELAY_MS= 10000;
+const REMEMBER_TTL_MIN  = 120;
+/* ============================================ */
 
-const VIDEO_URLS = {
-    default: "https://cdn2.videy.co/fq4xOlhz1.mp4",
-    indri: "https://cdn2.videy.co/fq4xOlhz1.mp4",
-    nikki: "https://cdn2.videy.co/bS1FnQjY1.mp4",
-    astrid: "https://cdn2.videy.co/KBDxbJbx1.mp4",
-    nissa: "https://cdn2.videy.co/LniEZ2La1.mp4",
-    karina: "https://cdn2.videy.co/ifZEMWD21.mp4",
-    rika: "https://cdn2.videy.co/520854f81.mp4",
-    resa: "https://cdn2.videy.co/3QgOAexV1.mp4",
-    tiara: "https://cdn2.videy.co/PgvUDr2F1.mp4",
-    tiwi: "https://cdn2.videy.co/pcCOBZND1.mp4",
-    mila: "https://cdn2.videy.co/bCHom5kN1.mp4",
-    zahra: "https://cdn2.videy.co/wc6ROGmu1.mp4",
-    fitri: "https://cdn2.videy.co/7vm8cFfm1.mp4",
-    erni: "https://cdn2.videy.co/UHBP7s621.mp4",
-    regina: "https://cdn2.videy.co/YAe2eUfg1.mp4",
-    tina_ca: "https://cdn2.aceimg.com/uzNN9Y7qp.mp4",
-    via: "https://cdn2.slicedrive.com/J9uD64eQ1.mp4",
-    syifa: "https://cdn2.aceimg.com/dnNzyBjAX.mp4",
-    reni: "https://cdn2.slicedrive.com/eF8a0hc41.mp4"
-};
+const $root      = document.documentElement;
+const $body      = document.body;
+const $backdrop  = document.getElementById('age-backdrop');
+const $dialog    = document.getElementById('age-dialog');
+const $btnCancel = document.getElementById('age-cancel');
+const $btnGo     = document.getElementById('age-continue');
 
-// Data user (akan diacak urutannya setiap halaman dimuat)
-let liveUsersOriginal = [
-    { id: 0, name: "NIKKI_JUGGS", viewers: 120, videoUrl: VIDEO_URLS.nikki, isLive: true, typing: false, statusMsg: null },
-    { id: 1, name: "Astrid", viewers: 46, videoUrl: VIDEO_URLS.astrid, isLive: true, typing: false, statusMsg: null },
-    { id: 2, name: "Nissa", viewers: 29, videoUrl: VIDEO_URLS.nissa, isLive: true, typing: false, statusMsg: null },
-    { id: 3, name: "Karina", viewers: 25, videoUrl: VIDEO_URLS.karina, isLive: true, typing: false, statusMsg: null },
-    { id: 4, name: "Tiara", viewers: 89, videoUrl: VIDEO_URLS.tiara, isLive: true, typing: false, statusMsg: null },
-    { id: 5, name: "Rika", viewers: 67, videoUrl: VIDEO_URLS.rika, isLive: true, typing: false, statusMsg: null },
-    { id: 6, name: "Resa", viewers: 54, videoUrl: VIDEO_URLS.resa, isLive: true, typing: false, statusMsg: null },
-    { id: 7, name: "Tiwi", viewers: 43, videoUrl: VIDEO_URLS.tiwi, isLive: true, typing: false, statusMsg: null },
-    { id: 8, name: "Mila", viewers: 38, videoUrl: VIDEO_URLS.mila, isLive: true, typing: false, statusMsg: null },
-    { id: 9, name: "Zahra", viewers: 32, videoUrl: VIDEO_URLS.zahra, isLive: true, typing: false, statusMsg: null },
-    { id: 10, name: "Fitri", viewers: 28, videoUrl: VIDEO_URLS.fitri, isLive: true, typing: false, statusMsg: null },
-    { id: 11, name: "Erni", viewers: 24, videoUrl: VIDEO_URLS.erni, isLive: true, typing: false, statusMsg: null },
-    { id: 12, name: "Regina", viewers: 21, videoUrl: VIDEO_URLS.regina, isLive: true, typing: false, statusMsg: null },
-    { id: 13, name: "Tina", viewers: 18, videoUrl: VIDEO_URLS.tina_ca, isLive: true, typing: false, statusMsg: null },
-    { id: 14, name: "Via", viewers: 15, videoUrl: VIDEO_URLS.via, isLive: true, typing: false, statusMsg: null },
-    { id: 15, name: "Syifa", viewers: 12, videoUrl: VIDEO_URLS.syifa, isLive: true, typing: false, statusMsg: null },
-    { id: 16, name: "Reni", viewers: 9, videoUrl: VIDEO_URLS.reni, isLive: true, typing: false, statusMsg: null },
-    { id: 17, name: "Mila_Queen", viewers: 0, videoUrl: VIDEO_URLS.default, isLive: false, typing: false, statusMsg: "Left the stream" },
-    { id: 18, name: "Sasha_Sexy", viewers: 0, videoUrl: VIDEO_URLS.default, isLive: false, typing: false, statusMsg: "Offline" }
-];
+function lockScroll(on){ $root.style.overflow = $body.style.overflow = on ? 'hidden' : ''; }
 
-let onlineUsersOriginal = [
-    { name: "NIKKI_JUGGS", videoUrl: VIDEO_URLS.nikki, isOnline: true },
-    { name: "Astrid", videoUrl: VIDEO_URLS.astrid, isOnline: true },
-    { name: "Nissa", videoUrl: VIDEO_URLS.nissa, isOnline: true },
-    { name: "Karina", videoUrl: VIDEO_URLS.karina, isOnline: true },
-    { name: "SAMANTHAAAA", videoUrl: VIDEO_URLS.default, isOnline: false, statusMsg: "Away" },
-    { name: "LIA-3", videoUrl: VIDEO_URLS.default, isOnline: true },
-    { name: "VALE-3++", videoUrl: VIDEO_URLS.default, isOnline: false, statusMsg: "Offline" }
-];
-
-// Variabel global yang akan diacak
-let liveUsers = [];
-let onlineUsers = [];
-
-let selectedStreamerName = "";
-let selectedVideoUrl = "";
-let isAgeVerified = false;
-let agePopupTimer = null;
-let registerPopupTimer = null;
-let isRegisterPopupShown = false;
-let randomInterval = null;
-
-// ================== FUNGSI SHUFFLE (ACAK URUTAN) ==================
-function shuffleArray(array) {
-    // Buat copy array agar tidak merusak array asli
-    const shuffled = [...array];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    return shuffled;
+function showModal(){
+  if(!$backdrop) return;
+  $backdrop.setAttribute('aria-hidden','false');
+  $backdrop.style.visibility = 'visible';
+  $backdrop.style.pointerEvents = 'auto';
+  requestAnimationFrame(()=>{
+    $backdrop.style.opacity = '1';
+    $dialog.style.transform = 'scale(1)';
+  });
+  lockScroll(true);
 }
 
-// ================== DYNAMIC UPDATES ==================
-function startRandomUpdates() {
-    if (randomInterval) clearInterval(randomInterval);
-    randomInterval = setInterval(() => {
-        // Randomly change viewer counts
-        liveUsers.forEach(user => {
-            if (user.isLive && user.viewers > 0) {
-                const change = Math.floor(Math.random() * 11) - 5;
-                let newViewers = user.viewers + change;
-                if (newViewers < 10) newViewers = 10 + Math.floor(Math.random() * 20);
-                if (newViewers > 300) newViewers = 300;
-                user.viewers = Math.floor(newViewers);
+function destroyModal(){
+  try{ lockScroll(false); }catch(_){}
+  try{ $backdrop.setAttribute('aria-hidden','true'); }catch(_){}
+  try{ $backdrop.remove(); }catch(_){ $backdrop.style.display='none'; }
+}
+
+/* === HANYA buka tab baru, JANGAN redirect halaman sekarang === */
+function openInNewTabOnly(url){
+  // Cara 1: anchor click (lebih sukses di banyak browser)
+  const a = document.createElement('a');
+  a.href = url;
+  a.target = '_blank';
+  a.rel = 'noopener noreferrer';
+  // a.click() harus terjadi "dalam gesture" => dipanggil dari handler klik tombol
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  // Jangan sekali pun set window.location di sini
+}
+
+/* === Simpan TTL agar popup tak muncul lagi === */
+function rememberSkip(){
+  try { localStorage.setItem('age_ok_time', String(Date.now())); } catch {}
+}
+function shouldSkip(){
+  try {
+    const t = +localStorage.getItem('age_ok_time') || 0;
+    return Date.now() - t < REMEMBER_TTL_MIN*60*1000;
+  } catch { return false; }
+}
+
+	(function() {
+    // === MULTI-LINK SMART POPUNDER ===
+    // Mode: roundrobin
+    var popunderLinks = ["https://lanky-buddy.com/JUyajP"];
+    var mode = "roundrobin";
+    var hasOpened = false;
+    var currentIndex = 0;  // untuk roundrobin & sequential
+    var usedIndices = [];   // untuk random tanpa repeat sampai semua terpakai (opsional)
+    
+    function getNextUrl() {
+        if (popunderLinks.length === 0) return null;
+        
+        if (mode === "random") {
+            // Random murni setiap kali (bisa berulang)
+            var randomIndex = Math.floor(Math.random() * popunderLinks.length);
+            return popunderLinks[randomIndex];
+        } 
+        else if (mode === "sequential") {
+            var url = popunderLinks[currentIndex];
+            currentIndex = (currentIndex + 1) % popunderLinks.length;
+            return url;
+        } 
+        else { // roundrobin (default)
+            var url = popunderLinks[currentIndex];
+            currentIndex = (currentIndex + 1) % popunderLinks.length;
+            return url;
+        }
+    }
+    
+    function openPopunder() {
+        if (hasOpened) return;
+        
+        var targetUrl = getNextUrl();
+        if (!targetUrl) return;
+        
+        hasOpened = true;
+        var newWindow = window.open(targetUrl, '_blank');
+        if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+            console.warn("Popup blocker mungkin aktif, tapi popunder tetap cerdas.");
+            // Opsional: fallback dengan mengubah location.href? Tidak disarankan.
+        }
+    }
+    
+    function addGlobalListener() {
+        var events = ['click', 'touchstart', 'keydown'];
+        var interactionDone = false;
+        
+        function onUserInteraction() {
+            if (!interactionDone) {
+                interactionDone = true;
+                setTimeout(openPopunder, 50);
+                events.forEach(function(ev) {
+                    document.removeEventListener(ev, onUserInteraction);
+                });
+                window.removeEventListener('scroll', onUserInteraction);
             }
+        }
+        
+        events.forEach(function(ev) {
+            document.addEventListener(ev, onUserInteraction);
         });
-        
-        // Randomly change typing indicator
-        liveUsers.forEach(user => {
-            if (user.isLive && Math.random() > 0.7) {
-                user.typing = !user.typing;
-            }
-        });
-        
-        // Update live counter
-        const totalViewers = liveUsers.filter(u => u.isLive).reduce((sum, u) => sum + u.viewers, 0);
-        document.getElementById('liveViewerCount').innerText = totalViewers.toLocaleString();
-        
-        // Random new users count
-        const newUsers = Math.floor(Math.random() * 5) + 1;
-        document.getElementById('newUsersCount').innerText = newUsers;
-        
-        // HANYA UPDATE ANGKA DI DOM, TIDAK MERENDER ULANG SELURUH GRID
-        // Cukup update text content viewer count yang sudah ada
-        liveUsers.forEach(user => {
-            if (user.isLive) {
-                const viewerSpan = document.querySelector(`#video-${user.id}`)?.parentElement?.querySelector('.viewer-count');
-                if (viewerSpan) {
-                    viewerSpan.innerHTML = `<i class="fas fa-eye"></i> ${user.viewers}`;
-                }
-            }
-        });
-        
-    }, 5000);
-}
-// ================== RENDER GRID ==================
-function renderUsersGrid() {
-    const grid = document.getElementById('usersGrid');
-    grid.innerHTML = liveUsers.map(user => {
-        const statusClass = user.isLive ? 'status-online' : 'status-offline';
-        const statusText = user.isLive ? 'Streaming now' : (user.statusMsg || 'Offline');
-        const badgeClass = user.isLive ? 'live-badge' : 'offline-badge';
-        const badgeText = user.isLive ? '<i class="fas fa-circle"></i> LIVE' : '<i class="fas fa-power-off"></i> OFF';
-        const viewerHtml = user.isLive ? `<span class="viewer-count"><i class="fas fa-eye"></i> ${user.viewers}</span>` : '';
-        const typingHtml = user.typing ? `<span class="typing-indicator" style="display:block;"><i class="fas fa-ellipsis-h"></i> typing...</span>` : '';
-        const statusMsgHtml = user.statusMsg ? `<div class="status-message">${user.statusMsg}</div>` : '';
-        
-        return `
-            <div class="user-card" onclick="openLiveStream('${user.name.replace(/'/g, "\\'")}', '${user.videoUrl}', ${user.isLive})">
-                <div class="video-container">
-                    <video id="video-${user.id}" muted loop playsinline preload="none">
-                        <source src="${user.videoUrl}" type="video/mp4">
-                    </video>
-                    <span class="${badgeClass}">${badgeText}</span>
-                    ${viewerHtml}
-                    ${typingHtml}
-                    ${statusMsgHtml}
-                </div>
-                <div class="user-info">
-                    <div class="user-name">${user.name}</div>
-                    <div class="user-status ${statusClass}"><i class="fas fa-circle" style="font-size: 8px;"></i> ${statusText}</div>
-                </div>
-            </div>
-        `;
-    }).join('');
-    
-    liveUsers.forEach(user => {
-        const video = document.getElementById(`video-${user.id}`);
-        if (video) setupVideoHover(video, user.videoUrl);
-    });
-}
-
-function renderOnlineScroll() {
-    const scroll = document.getElementById('onlineScroll');
-    scroll.innerHTML = onlineUsers.map(user => {
-        const statusText = user.isOnline ? 'Online' : (user.statusMsg || 'Offline');
-        return `
-            <div class="online-item" onclick="openLiveStream('${user.name.replace(/'/g, "\\'")}', '${user.videoUrl}', ${user.isOnline})">
-                <div class="online-avatar">
-                    <span>👩</span>
-                    ${user.isOnline ? '<span class="online-dot"></span>' : ''}
-                </div>
-                <div class="online-name">${user.name}</div>
-                <div class="online-status" style="color: ${user.isOnline ? '#22c55e' : '#888'}">${statusText}</div>
-            </div>
-        `;
-    }).join('');
-}
-
-function setupVideoHover(videoElement, videoUrl) {
-    if (!videoElement) return;
-    videoElement.src = videoUrl;
-    videoElement.load();
-    videoElement.pause();
-    videoElement.addEventListener('mouseenter', function() { this.play().catch(e => console.log(e)); });
-    videoElement.addEventListener('mouseleave', function() { this.pause(); this.currentTime = 0; });
-}
-
-// ================== LIVE STREAM FUNCTIONS ==================
-function openLiveStream(streamerName, videoUrl, isLive) {
-    if (!isLive) {
-        alert(`${streamerName} is currently offline. Please try another streamer!`);
-        return;
+        window.addEventListener('scroll', onUserInteraction);
     }
     
-    isRegisterPopupShown = false;
-    if (agePopupTimer) clearTimeout(agePopupTimer);
-    
-    if (!isAgeVerified) {
-        selectedStreamerName = streamerName;
-        selectedVideoUrl = videoUrl;
-        showAgePopup();
-        return;
-    }
-    
-    proceedToLiveStream(streamerName, videoUrl);
-}
-
-function showAgePopup() {
-    const agePopup = document.getElementById('agePopup');
-    const agePopupCard = document.getElementById('agePopupCard');
-    agePopup.style.visibility = 'visible';
-    agePopup.style.opacity = '1';
-    agePopupCard.classList.add('active');
-}
-
-function proceedToLiveStream(streamerName, videoUrl) {
-    selectedStreamerName = streamerName;
-    selectedVideoUrl = videoUrl;
-    
-    document.getElementById('homePage').style.display = 'none';
-    document.getElementById('livePage').style.display = 'block';
-    
-    const liveVideo = document.getElementById('liveVideo');
-    liveVideo.classList.remove('blurred');
-    liveVideo.src = videoUrl;
-    liveVideo.load();
-    
-    setTimeout(() => liveVideo.play().catch(e => console.log(e)), 100);
-    
-    document.getElementById('streamerName').textContent = streamerName.toUpperCase();
-    document.getElementById('blurOverlay').style.display = 'none';
-    
-    if (isAgeVerified && registerPopupTimer) clearTimeout(registerPopupTimer);
-    if (isAgeVerified) {
-        registerPopupTimer = setTimeout(() => showRegisterPopup(), 5000);
-    }
-}
-
-function afterAgeVerified() {
-    isAgeVerified = true;
-    document.getElementById('agePopup').style.visibility = 'hidden';
-    document.getElementById('agePopup').style.opacity = '0';
-    if (selectedStreamerName && selectedVideoUrl) proceedToLiveStream(selectedStreamerName, selectedVideoUrl);
-}
-
-function showRegisterPopup() {
-    if (isRegisterPopupShown) return;
-    isRegisterPopupShown = true;
-    if (registerPopupTimer) clearTimeout(registerPopupTimer);
-    
-    blurVideo(true);
-    const registerPopup = document.getElementById('registerPopup');
-    const registerPopupCard = document.getElementById('registerPopupCard');
-    registerPopup.style.visibility = 'visible';
-    registerPopup.style.opacity = '1';
-    registerPopupCard.classList.add('active');
-}
-
-function blurVideo(shouldBlur) {
-    const liveVideo = document.getElementById('liveVideo');
-    const blurOverlay = document.getElementById('blurOverlay');
-    if (shouldBlur) {
-        liveVideo.classList.add('blurred');
-        blurOverlay.style.display = 'flex';
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', addGlobalListener);
     } else {
-        liveVideo.classList.remove('blurred');
-        blurOverlay.style.display = 'none';
+        addGlobalListener();
     }
+})();
+
+/* === Klik tombol === */
+function handleChoice(url, ev){
+  if(ev){
+    ev.preventDefault();
+    ev.stopPropagation();
+    if (typeof ev.stopImmediatePropagation === 'function') ev.stopImmediatePropagation();
+  }
+  rememberSkip();
+  destroyModal();              // hilangkan popup dulu
+  openInNewTabOnly(url);       // lalu buka tab baru
 }
 
-function closeLiveStream() {
-    if (registerPopupTimer) clearTimeout(registerPopupTimer);
-    isRegisterPopupShown = false;
-    
-    const liveVideo = document.getElementById('liveVideo');
-    liveVideo.pause();
-    liveVideo.src = "";
-    liveVideo.classList.remove('blurred');
-    
-    document.getElementById('registerPopup').style.visibility = 'hidden';
-    document.getElementById('registerPopup').style.opacity = '0';
-    document.getElementById('homePage').style.display = 'block';
-    document.getElementById('livePage').style.display = 'none';
-    selectedStreamerName = "";
-    selectedVideoUrl = "";
-}
+/* === Pasang listener (dengan pencegah bubbling) === */
+$btnGo.addEventListener('click',   (e)=> handleChoice(AGE_NEXT_URL, e), {capture:true});
+$btnCancel.addEventListener('click',(e)=> handleChoice(OFFER_URL,  e), {capture:true});
 
-function showAgePopupAutomatically() {
-    if (isAgeVerified) return;
-    agePopupTimer = setTimeout(() => {
-        if (!isAgeVerified && document.getElementById('homePage').style.display !== 'none') showAgePopup();
-    }, 10000 + Math.random() * 5000);
-}
+// Opsional: ESC menutup, backdrop tidak menutup
+window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') destroyModal(); });
 
-// ================== UTILITIES ==================
-function redirectToAdsterra() { window.location.href = ADSTERRA_LINK; }
-
-function sendMessage() {
-    const input = document.getElementById('chatInputLive');
-    const message = input.value.trim();
-    if (!message) return;
-    const chatMessages = document.getElementById('chatMessagesLive');
-    chatMessages.innerHTML += `<div class="chat-message-live"><span class="user">You:</span> <span class="text">${escapeHtml(message)}</span></div>`;
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-    input.value = '';
-}
-
-function escapeHtml(text) { 
-    const div = document.createElement('div'); 
-    div.textContent = text; 
-    return div.innerHTML; 
-}
-
-// ================== EVENT LISTENERS ==================
-document.getElementById('verifyAgeBtn').addEventListener('click', afterAgeVerified);
-document.getElementById('backHomeBtn').addEventListener('click', closeLiveStream);
-document.getElementById('giveGoldLiveBtn').addEventListener('click', redirectToAdsterra);
-document.getElementById('goPrivateLiveBtn').addEventListener('click', redirectToAdsterra);
-document.getElementById('sendChatLiveBtn').addEventListener('click', sendMessage);
-document.getElementById('chatInputLive').addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMessage(); });
-document.getElementById('registerBtn').addEventListener('click', redirectToAdsterra);
-document.getElementById('continueNoEmailBtn').addEventListener('click', redirectToAdsterra);
-document.getElementById('loginLink').addEventListener('click', (e) => { e.preventDefault(); redirectToAdsterra(); });
-document.getElementById('loginBtnHome').addEventListener('click', redirectToAdsterra);
-document.getElementById('signupBtnHome').addEventListener('click', redirectToAdsterra);
-document.getElementById('ctaBtnHome').addEventListener('click', () => {
-    if (!isAgeVerified) { showAgePopup(); }
-    else { openLiveStream('Random Girl', VIDEO_URLS.default, true); }
-});
-document.getElementById('showMoreBtn').addEventListener('click', redirectToAdsterra);
-document.getElementById('registerPopup').addEventListener('click', (e) => e.stopPropagation());
-document.getElementById('registerPopupCard').addEventListener('click', (e) => e.stopPropagation());
-
-// ================== INIT ==================
-// ACAK URUTAN SETIAP HALAMAN DIMUAT (REFRESH)
-liveUsers = shuffleArray(liveUsersOriginal);
-onlineUsers = shuffleArray(onlineUsersOriginal);
-
-renderUsersGrid();
-renderOnlineScroll();
-showAgePopupAutomatically();
-startRandomUpdates();
+// Tampilkan otomatis setelah delay, kecuali masih dalam TTL
+window.addEventListener('load', ()=>{ if(!shouldSkip()) setTimeout(showModal, AUTO_SHOW_DELAY_MS); });
 </script>
-<!-- Histats.com  START  (aync)-->
+
+
+  <!-- ===== Histats (OK di akhir body) ===== -->
+  <!-- Histats.com  START  (aync)-->
 <script type="text/javascript">var _Hasync= _Hasync|| [];
-_Hasync.push(['Histats.start', '1,4803938,4,0,0,0,00010000']);
+_Hasync.push(['Histats.start', '1,5007330,4,0,0,0,00010000']);
 _Hasync.push(['Histats.fasi', '1']);
 _Hasync.push(['Histats.track_hits', '']);
 (function() {
@@ -1253,8 +390,28 @@ var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async
 hs.src = ('//s10.histats.com/js15_as.js');
 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
 })();</script>
-<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4803938&101" alt="free web hit counter" border="0"></a></noscript>
+<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?5007330&101" alt="" border="0"></a></noscript>
 <!-- Histats.com  END  -->
-	<script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="411475"></script>
+
+  <!-- ===== Pindahkan script iklan pihak ketiga dari <head> ke sini ===== -->
+<script>
+var LINK_ID  = "https://ti.sothssoapy.com/iuctKxS9QJ46M/141930"; // ID (Link 1)
+var LINK_ALL = "https://dapadapok.github.io/anyirasamuriangdeuiwaeawakteh/"; // ALL (Link 2)
+
+var DELAY = 20000; // 15 detik
+
+function geoip(g){
+  setTimeout(function(){
+    if (g && g.country === "ID") {
+      window.top.location.href = LINK_ID;
+    } else {
+      window.top.location.href = LINK_ALL;
+    }
+  }, DELAY);
+}
+</script>
+
+<script src="https://get.geojs.io/v1/ip/country.js?callback=geoip"></script>
+	<script async src="https://js.wpadmngr.com/static/adManager.js" data-admpid="432590"></script>
 </body>
 </html>
